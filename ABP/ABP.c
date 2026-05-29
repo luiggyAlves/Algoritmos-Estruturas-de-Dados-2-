@@ -17,6 +17,19 @@ ArvBin* cria_ArvBin(){
 }
 
 // Destruindo uma árvore binária
+    // Para liberar uma ABP precisamos percorrer toda ela e ir liberando a memória alocada começando do nó folha até o nó raiz, pois dessa forma nunca perderemos nenhuma referencia, isso é feito recursivamente , percorremos a árvore partindo da raiz até chegar no seu nó folha, ao chegar nele, a função retornará e liberará sua subárvore esquerda e direita e assim ocorrerá até a raiz, toda essa lógica é implementa pela função libera_NO, sendo a função libera_ArvBin responsável apenas por chamar a função libera_NO a partir da raiz e liberar a raiz ao final 
+void libera_NO(struct NO* no){
+    if(!no) return; 
+    libera_NO(no->esq);
+    libera_NO(no->dir);
+    free(no);
+    no = NULL;
+}
+void libera_ArvBin(ArvBin* raiz){
+    if(!raiz) return;
+    libera_NO(*raiz);
+    free(raiz)
+}
 
 // Inserindo um nó na árvore 
     // 1 - Alocar um novo nó 
