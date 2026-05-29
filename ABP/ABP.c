@@ -42,7 +42,7 @@ int insere_ArvBin(ArvBin* raiz, int valorInserido){
     novo->esq = NULL;
     novo->dir = NULL;
     // Se a árvore estiver vazia, o nó inserido vira a raiz
-    if(!raiz) *raiz = novo;
+    if(!(*raiz)) *raiz = novo;
     // Se a árvore não estiver vazia, percorrer até encontrar o local de inserção
     else{
         struct NO* atual = *raiz; // nó atual será usado para percorrermos a árvore
@@ -144,7 +144,7 @@ int remove_ArvBin(ArvBin* raiz, int valorRemovido){
 
 // Fornecendo informações básicas sobre a árvore
     // Verificaremos se uma árvore está vazia, a altura de uma árvore e o percurso da árvore (posOrdem, preOrdem ou emOrdem), que nos mostrará todos os elementos da árvore e também veremos quantos nós a árvore tem
-int estaVaiza_ArvBin(ArvBin *raiz){
+int estaVazia_ArvBin(ArvBin *raiz){
     if(!raiz) return 1; // Se raiz não foi iniciada, (o ponteiro para ponteiro não aponta para nada), a árvore está vazia
     if(!(*raiz)) return 1; // Se raiz foi iniciada, o ponteiro para ponteiro aponta para *raiz, mas *raiz não aponta para nada, a árvore está vazia
     return 0;  // Caso contrário, a árvore não está vazia
