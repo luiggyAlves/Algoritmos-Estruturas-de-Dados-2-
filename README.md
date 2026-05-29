@@ -1,4 +1,4 @@
-# Repositório de aprendizado da matéria Algoritmos e Estruturas de Dados 2
+# Repositório da matéria Algoritmos e Estruturas de Dados 2
 
 ## Árvore Binária de Pesquisa (ABP)
 
