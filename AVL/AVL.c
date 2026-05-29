@@ -81,3 +81,24 @@ void posOrdem_ArvAVL(ArvAVL* raiz){
     posOrdem_ArvBin(&((*raiz)->dir));
     printf("%d\n", (*raiz)->info);
 }   
+
+// Funções auxiliares: serão usadas para agilizar a tarefa do cálculo de balanceamento de uma árvore
+
+// retornar a altura de uma subárvore, considerando o nó dado como a raiz
+int alt_NO(struct NO* no){
+    if(!no) return -1
+    return no->alt;
+}
+
+// retornar o fator de balanceamento de um nó
+int fatorBalanceamento_NO(struct NO* no){
+    return alt_NO(no->esq) - alt_NO(no->dir);
+}
+
+// retornar o maior dentre dois valores
+int maior(int x, int y){
+    if (x>y) return x;
+    return y;
+}
+
+
