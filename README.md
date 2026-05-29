@@ -1,5 +1,5 @@
 # Repositório de Algoritmos e Estruturas de Dados 2
-Este repositório tem como intuito documentar meus aprendizados durante a matéria Algoritmos e Estruturas de Dados 2, ministrada pelo Prof. João Marcos no Instituto de Computação (IComp) da Universidade Federal do Amazonas (UFAM), para os discentes do terceiro período do curso de Ciência da Computação.
+Este repositório tem como intuito documentar meus aprendizados e permitir a revisita posterior aos conteúdos referentes à matéria Algoritmos e Estruturas de Dados 2, ministrada pelo Prof. João Marcos no Instituto de Computação (IComp) da Universidade Federal do Amazonas (UFAM), para os discentes do terceiro período do curso de Ciência da Computação.
 
 ## Árvore Binária de Pesquisa (ABP)
 
