@@ -16,6 +16,8 @@ ArvBin* cria_ArvBin(){
     return raiz;
 }
 
+// Destruindo uma árvore binária
+
 // Inserindo um nó na árvore 
     // 1 - Alocar um novo nó 
     // 2.1 - Se a árvore estiver vazia(raiz aponta para NULL) o nó inserido vira Raiz
@@ -112,3 +114,16 @@ int remove_ArvBin{ArvBin* raiz, int valorRemovido}{
     }
     return 0;
 }
+
+// Buscando na árvore 
+    // A busca é o processo mais simples, pois basta percorrer a árvore usando a lógica da ABP até se encontrar o elemento ou testificar-se que o elemento não está presente na árvore 
+    int consulta_ArvBin(ArvBin *raiz; int valorBuscado){
+        if(!raiz) return 0; // Não dá pra buscar numa árvore vazia
+        struct NO* atual = *raiz;
+        while(atual){
+            if(valorBuscado==atual) return 1;
+            else if(valor > atual->info) atual = atual->dir;
+            else atual = atual->esq;
+        }
+        return 0;
+    }
