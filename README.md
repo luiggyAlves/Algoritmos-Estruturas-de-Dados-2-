@@ -2,15 +2,15 @@
 
 ## Árvore Binária de Pesquisa (ABP)
 
-## Tipo Principal
+### Tipo Principal
 
 **`ArvBin`** — Alias para `struct NO*`. Usado como `ArvBin*` nas funções, formando indiretamente um ponteiro duplo (`NO**`) que permite modificar o ponteiro raiz da árvore diretamente.
 
 ---
 
-## Funções
+### Funções
 
-### Criação e Destruição
+#### Criação e Destruição
 
 **`ArvBin* cria_ArvBin()`**
 Aloca e retorna um ponteiro para a raiz da árvore, inicializado com `NULL`. Deve ser chamada antes de qualquer outra operação.
@@ -20,7 +20,7 @@ Libera toda a memória da árvore. Percorre recursivamente todos os nós (da fol
 
 ---
 
-### Inserção e Remoção
+#### Inserção e Remoção
 
 **`int insere_ArvBin(ArvBin* raiz, int valorInserido)`**
 Insere um novo nó com o valor informado respeitando as regras da ABP (menores à esquerda, maiores à direita). Valores duplicados são ignorados. Retorna `1` em caso de sucesso e `0` se o valor já existir na árvore.
@@ -32,14 +32,14 @@ Remove o nó com o valor informado. Cobre três casos: nó folha, nó raiz e nó
 
 ---
 
-### Consulta
+#### Consulta
 
 **`int consulta_ArvBin(ArvBin* raiz, int valorBuscado)`**
 Busca um valor na árvore percorrendo-a pelas regras da ABP. Retorna `1` se o valor for encontrado e `0` caso contrário.
 
 ---
 
-### Informações da Árvore
+#### Informações da Árvore
 
 **`int estaVazia_ArvBin(ArvBin* raiz)`**
 Verifica se a árvore está vazia. Retorna `1` se estiver vazia (raiz não inicializada ou apontando para `NULL`) e `0` caso contrário.
@@ -52,7 +52,7 @@ Retorna a altura da árvore, definida como o número de nós no maior caminho da
 
 ---
 
-### Percursos
+#### Percursos
 
 **`void preOrdem_ArvBin(ArvBin* raiz)`**
 Percorre e imprime os nós na ordem: **raiz → esquerda → direita**.
