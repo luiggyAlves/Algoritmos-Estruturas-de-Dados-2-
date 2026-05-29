@@ -7,7 +7,7 @@ struct NO{
     int info;
     struct NO* esq;
     struct NO* dir;
-}
+};
 
 // Criando uma árvore binária
 ArvBin* cria_ArvBin(){
@@ -28,7 +28,7 @@ void libera_NO(struct NO* no){
 void libera_ArvBin(ArvBin* raiz){
     if(!raiz) return;
     libera_NO(*raiz);
-    free(raiz)
+    free(raiz);
 }
 
 // Inserindo um nó na árvore 
@@ -59,7 +59,7 @@ int insere_ArvBin(ArvBin* raiz, int valorInserido){
             else atual = atual->esq;
         }
         if(novo->info>ant->info) ant->dir = novo;
-        else ant->esq = novo
+        else ant->esq = novo;
     } 
     return 1;
 }
@@ -104,7 +104,7 @@ struct NO* remove_atual(struct NO* atual){
         return no2;
 }
 
-int remove_ArvBin{ArvBin* raiz, int valorRemovido}{
+int remove_ArvBin(ArvBin* raiz, int valorRemovido){
     if(!raiz) return 0; // Não tem como remover elementos de uma árvore vazia
     struct NO* ant = NULL;
     struct NO* atual = *raiz; // atual recebe o nó para o qual raiz aponta, pois ele irá percorrer, a partir da raiz, toda a árvore para encontrar o local de remoção
@@ -122,7 +122,7 @@ int remove_ArvBin{ArvBin* raiz, int valorRemovido}{
         }
         // Se ainda não encontrarmos o valor a ser removido, ant recebe atual, atual aplica as regras da ABP para verificar se deve ir para a direita ou esquerda e faz essa movimentação
         ant = atual;
-        if(valor > atual->info) atual = atual->dir;
+        if(valorRemovido > atual->info) atual = atual->dir;
         else atual = atual->esq;
     }
     return 0;
@@ -130,12 +130,12 @@ int remove_ArvBin{ArvBin* raiz, int valorRemovido}{
 
 // Buscando na árvore 
     // A busca é o processo mais simples, pois basta percorrer a árvore usando a lógica da ABP até se encontrar o elemento ou testificar-se que o elemento não está presente na árvore 
-    int consulta_ArvBin(ArvBin *raiz; int valorBuscado){
+    int consulta_ArvBin(ArvBin *raiz, int valorBuscado){
         if(!raiz) return 0; // Não dá pra buscar numa árvore vazia
         struct NO* atual = *raiz;
         while(atual){
-            if(valorBuscado==atual) return 1;
-            else if(valor > atual->info) atual = atual->dir;
+            if(valorBuscado==atual->info) return 1;
+            else if(valorBuscado > atual->info) atual = atual->dir;
             else atual = atual->esq;
         }
         return 0;
@@ -150,5 +150,45 @@ int estaVaiza_ArvBin(ArvBin *raiz){
     return 0;  // Caso contrário, a árvore não está vazia
 }
 
+int totalNO_ArvBin(ArvBin *raiz){
+    if(!raiz || !(*raiz)) return 0;// caso de parada, quando chegar num no folha
+    // as chamadas recursivas descem ate encontrar um no folha, quando encontram um no folha, retornam um valor, que é atribuido às variaveis dos nós pais, esse processo é feito para cada nó, sempre passando +1 para o nó pai, com o intuito de contabilizar o nó, ao final temos a função que retorna a quantidade de nós da árvore
+    int total_esq = totalNO_ArvBin(&((*raiz)->esq));
+    int total_dir = totalNO_ArvBin(&((*raiz)->dir));
+    return (total_esq + total_dir + 1);
+}
 
+int altura_ArvBin(ArvBin *raiz){
+    if(!raiz || !(*raiz)) return 0;
+    // Cada nó pai verifica a altura de suas subárvores, sempre retornando a maior, isso se repete até chegar à raiz, assim, teremos a altura da árvore, que é a quantidade de nós da maior subárvore da árvore
+    int alt_esq = altura_ArvBin(&((*raiz)->esq));
+    int alt_dir = altura_ArvBin(&((*raiz)->dir));
+    if(alt_esq > alt_dir) return (alt_esq + 1);
+    else return (alt_dir +1);
+}
 
+// Percorrendo a árvore binária;
+    // pré ordem: visita a raiz, o filho da esquerda e o filho da direita, nessa ordem até chegar ao final: raiz fica no começo
+    // em ordem: visita o filho da esquerda, a raiz e o filho da direita, sempre começando do nó folha mais à esquerda, devido à chamada recursiva, os elementos são mostrados na ordem estabelecida 
+    // pós ordem: visita a esquerda, a direita e por fim a raiz, raiz aparece no "meio", considerando a árvore balanceada
+
+void preOrdem_ArvBin(ArvBin* raiz){
+    if(!raiz || !(*raiz)) return;
+    printf("%d\n", (*raiz)->info);
+    preOrdem_ArvBin(&((*raiz)->esq));
+    preOrdem_ArvBin(&((*raiz)->dir));
+}
+
+void emOrdem_ArvBin(ArvBin* raiz){
+    if(!raiz || !(*raiz)) return;
+    emOrdem_ArvBin(&((*raiz)->esq));
+    printf("%d\n", (*raiz)->info);
+    emOrdem_ArvBin(&((*raiz)->dir));
+}
+
+void posOrdem_ArvBin(ArvBin* raiz){
+    if(!raiz || !(*raiz)) return;
+    posOrdem_ArvBin(&((*raiz)->esq));
+    posOrdem_ArvBin(&((*raiz)->dir));
+    printf("%d\n", (*raiz)->info);
+}   
