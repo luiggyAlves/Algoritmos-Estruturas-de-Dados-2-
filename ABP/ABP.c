@@ -89,3 +89,26 @@ struct NO* remove_atual(struct NO* atual){
         return no2;
 }
 
+int remove_ArvBin{ArvBin* raiz, int valorRemovido}{
+    if(!raiz) return 0; // Não tem como remover elementos de uma árvore vazia
+    struct NO* ant = NULL;
+    struct NO* atual = *raiz; // atual recebe o nó para o qual raiz aponta, pois ele irá percorrer, a partir da raiz, toda a árvore para encontrar o local de remoção
+    while(atual!=NULL){
+        // Encontrou o elemento que será removido
+        if(valorRemovido == atual->info){
+            // Se esse elemento for a raiz, removemos a raiz diretamente, sem usar o ant, pois a raiz não possui nenhum nó pai
+            if(atual == *raiz) *raiz = remove_atual(atual);
+            else{
+                // se o elemento não for a raiz, verificamos se é o da direita ou da esquerda de ant e usamos a função remove_atual, pois precisamos fazer o link do nó substituido com o nó pai, que a função remove_atual não faz
+                if(ant->dir == atual) ant->dir = remove_atual(atual);
+                else ant->esq = remove_atual(atual);
+            }
+            return 1;
+        }
+        // Se ainda não encontrarmos o valor a ser removido, ant recebe atual, atual aplica as regras da ABP para verificar se deve ir para a direita ou esquerda e faz essa movimentação
+        ant = atual;
+        if(valor > atual->info) atual = atual->dir;
+        else atual = atual->esq;
+    }
+    return 0;
+}
