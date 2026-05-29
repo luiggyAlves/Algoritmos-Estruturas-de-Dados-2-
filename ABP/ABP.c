@@ -45,8 +45,47 @@ int insere_ArvBin(ArvBin* raiz, int valorInserido){
         }
         if(novo->info>ant->info) ant->dir = novo;
         else ant->esq = novo
-
     } 
     return 1;
-
 }
+
+// Removendo um nó da árvore
+    // Consideravelmente mais complexo que inserir um nó na árvore, pois temos três casos distintos que precisamos cobrir 
+        // 1 - O elemento a ser removido é um nó folha, nesse caso, a remoção é simples 
+        // 2 - O elemento a ser removido é a raiz ou a árvore está vazia, a remoção também é simples 
+        // 3 - O elemento a ser removido é um nó interno, assim, precisamos reconfigurar toda a árvore para que ela continue seguindo as restrições da árvore binária de pesquisa, nesse caso, a remoção é extremamente mais complexa que os anteriores 
+    // Utilizaremos duas funções:
+        // removeArvBin : procura o nó a ser removido e cobre o caso 2, quando o removido é a raiz ou a árvore está vazia;
+        // remove_atual: cobre os casos 1 e 3, removendo nós folhas ou internos 
+
+// Essa função recebe como parâmetro o ponteiro do nó da árvore que deve ser removido e indica qual deve ser seu substituto
+struct NO* remove_atual(struct NO* atual){
+    // Caso 1: O nó a ser removido (atual) não possui filho a esquerda
+        // Nesse caso, a função substitui o nó atual pelo filho da direita: copia o nó atual para um nó auxiliar (no2), libera atual e retorna no2 como substituto. Com esse caso, tratamos nós folha (vira NULL) e nós que não possuem a subárvore à esquerda
+    struct NO *no1, *no2;
+    if(atual->esq == NULL) {
+        no2 = atual->dir;
+        free(atual);
+        return no2;
+    }
+    // Caso 2: O nó a ser removido possui os dois filhos 
+        // Nesse caso, procuraremos o filho mais à direita da subárvore da esquerda, pois garantimos que ele é menor que ele é menor que todos os elementos da subárvore à direita do nó atual e maior que todos os elementos da subárvore à esquerda, dessa forma, conseguimos manter a mesma configuração
+            // Para isso, utilizamos o no1 como pai do no2, no2 percorre até o elemento mais à direita da subárvore da esquerda 
+        // Chegando no elemento mais à direita, se o pai dele for o atual, basta fazer a substituição direta das subárvores, se forem diferentes, no1 (o pai do elemento mais à direita) recebe como subarvore da esquerda, a subarvore esquerda de no2, no2 recebe as duas subarvores de atual, pois será seu substituto.
+    no1 = atual;
+    no2 = atual->esq;
+    while(no2->dir != NULL){
+        no1 = no2;
+        no2 = no2->dir;
+    }   
+    if(no1!=atual){
+        no1->dir = no2->esq;
+        no2->esq = atual->esq;
+    }
+        no2->dir = atual->dir;
+    
+    // Por fim, a função libera atual e retorna no2 como seu substituto, a orquestração de linkar no2 ao pai de atual, será feita pela função remove_ArvBin
+        free(atual);
+        return no2;
+}
+
