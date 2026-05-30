@@ -167,3 +167,11 @@ A                A                C
  /                  \
 C                    B
 ```
+
+#### Quando usar cada tipo de rotação?
+
+Considere o nó A como sendo o nó desbalanceado e o nó B como sendo seu nó filho:
+* Sempre que os sinais do fator de balanceamento de A e B forem iguais, a rotação é simples
+  * Se os sinais forem iguais e negativos, a rotação é à esquerda (RR), se os sinais forem iguais e positivos, a rotação é à direita (LL)
+* Sempre que os sinais do fator de balanceamento de A e B forem diferentes, a rotação é dupla
+  * Se A for positivo, a rotação é dupla à direita (LR), se B for positivo, a rotação è à esquerda (RL)
